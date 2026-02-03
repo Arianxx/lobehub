@@ -17,6 +17,17 @@ jobs:
     if: ${{ github.event.repository.fork }}
 
     steps:
+      - name: 🔍 Debug Token # 调试步骤
+        run: |
+          echo "Check if secret exists..."
+          if [ -n "${{ secrets.PERSONAL_ACCESS_TOKEN }}" ]; then
+           echo "✅ Token is DETECTED (长度: ${#tok} 字符)"
+          else 
+           echo "❌ Token is EMPTY (未读到密钥)"
+          fi
+       env:
+         tok: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+         
       - uses: actions/checkout@v6
 
       - name: Clean issue notice
